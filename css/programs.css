@@ -1,0 +1,25 @@
+.programs-section { padding: 70px 0; background: #fff; }
+
+.programs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.program-card {
+    background: #fff;
+    border: 2px solid #f0f0f0;
+    border-radius: 16px;
+    padding: 35px 25px;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.program-card:hover {
+    border-color: #ffd200;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.program-icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+
+.program-card h3 { font-size: 1.15rem; margin-bottom: 10px; color: #2c2c2c; }
+.program-card p { font-size: 0.95rem; color: #666; line-height: 1.6; }

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Счастливая история — фонд помощи животным</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== ШАПКА ===== */
+        /* Верхняя желтая панель */
+        .top-bar {
+            background: #ffd200; /* Желтый как у донора */
+            padding: 15px 0;
+        }
+
+        .top-bar-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #222;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-white {
+            background: #fff;
+            color: #222;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: opacity 0.2s;
+        }
+        .btn-white:hover { opacity: 0.8; }
+
+        .btn-green {
+            background: #1a5c2a; /* Темно-зеленый как у донора */
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        .btn-green:hover { background: #13451e; }
+
+        /* Нижняя белая панель (меню) */
+        .main-nav {
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+
+        .main-nav-inner {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 15px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .main-nav a:hover { color: #e86c3a; }
+
+        /* ===== СЛАЙДЕР ===== */
+        .slider-section {
+            padding: 40px 0;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 500px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #999;
+        }
+
+        /* Заглушки для фото. Замените на <img src="..."> */
+        .slide:nth-child(1) { background: linear-gradient(135deg, #ffe8dc, #ffd0b8); }
+        .slide:nth-child(2) { background: linear-gradient(135deg, #dcf0ff, #b8e0ff); }
+        .slide:nth-child(3) { background: linear-gradient(135deg, #dcffe0, #b8ffcf); }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.8);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+        }
+        .slider-btn:hover { background: #fff; }
+        .slider-btn.prev { left: 20px; }
+        .slider-btn.next { right: 20px; }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .dot.active { background: #ffd200; }
+
+        /* ===== ОСТАЛЬНЫЕ СЕКЦИИ (оставил как было) ===== */
+        section { padding: 70px 0; }
+        .section-title { font-size: 1.8rem; text-align: center; margin-bottom: 15px; color: #2c2c2c; }
+        .section-subtitle { text-align: center; color: #777; margin-bottom: 45px; }
+
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); }
+        .card-img { height: 220px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 3rem; }
+        .card-body { padding: 25px; }
+        .card-body h3 { font-size: 1.3rem; margin-bottom: 10px; color: #2c2c2c; }
+        .card-body p { color: #666; font-size: 0.95rem; margin-bottom: 20px; }
+        .progress-info { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px; color: #555; }
+        .progress-bar { height: 10px; background: #f0f0f0; border-radius: 5px; overflow: hidden; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: #e86c3a; border-radius: 5px; transition: width 0.5s; }
+        .btn-card { display: block; text-align: center; background: #e86c3a; color: #fff; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background 0.2s; }
+        .btn-card:hover { background: #d55a2a; }
+
+        .stats { background: #fafafa; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 30px; text-align: center; }
+        .stat-number { font-size: 2.5rem; font-weight: 700; color: #e86c3a; display: block; }
+        .stat-label { color: #666; font-size: 0.95rem; margin-top: 5px; }
+
+        .help-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
+        .help-item { background: #fff; border: 2px solid #f0f0f0; border-radius: 16px; padding: 35px 25px; text-align: center; transition: border-color 0.2s, transform 0.2s; text-decoration: none; color: inherit; display: block; }
+        .help-item:hover { border-color: #e86c3a; transform: translateY(-3px); }
+        .help-icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        .help-item h3 { font-size: 1.15rem; margin-bottom: 8px; color: #2c2c2c; }
+        .help-item p { font-size: 0.9rem; color: #777; }
+
+        footer { background: #2c2c2c; color: #ccc; padding: 50px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-grid h4 { color: #fff; margin-bottom: 15px; font-size: 1.1rem; }
+        .footer-grid p, .footer-grid a { color: #aaa; font-size: 0.9rem; text-decoration: none; display: block; margin-bottom: 8px; }
+        .footer-grid a:hover { color: #e86c3a; }
+        .footer-bottom { border-top: 1px solid #444; padding-top: 25px; text-align: center; font-size: 0.85rem; color: #888; }
+
+        @media (max-width: 768px) {
+            .top-bar-inner { flex-direction: column; gap: 15px; }
+            .main-nav-inner { justify-content: flex-start; }
+            .slide { height: 250px; }
+            .logo { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header>
+        <div class="top-bar">
+            <div class="container top-bar-inner">
+                <div class="logo">
+                    <span class="logo-icon">🐾</span>
+                    <span>Счастливая<br>история</span>
+                </div>
+                <div class="top-actions">
+                    <a href="#" class="btn-white">Стать волонтёром</a>
+                    <a href="#help" class="btn-green">Помочь</a>
+                </div>
+            </div>
+        </div>
+        <div class="main-nav">
+            <div class="container main-nav-inner">
+                <a href="#">Главная</a>
+                <a href="#about">О нас</a>
+                <a href="#">Программы фонда</a>
+                <a href="#">Новости</a>
+                <a href="#">Ищут дом</a>
+                <a href="#">Полезное</a>
+                <a href="#">Мероприятия</a>
+                <a href="#help">Виды помощи</a>
+                <a href="#contacts">Контакты</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- СЛАЙДЕР -->
+    <section class="slider-section">
+        <div class="container">
+            <div class="slider-container">
+                <div class="slider-track" id="sliderTrack">
+                    <!-- Слайд 1 -->
+                    <div class="slide">Фото 1 (замените на &lt;img&gt;)</div>
+                    <!-- Слайд 2 -->
+                    <div class="slide">Фото 2</div>
+                    <!-- Слайд 3 -->
+                    <div class="slide">Фото 3</div>
+                </div>
+                <button class="slider-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+                <button class="slider-btn next" onclick="moveSlide(1)">&#10095;</button>
+                <div class="slider-dots" id="dots">
+                    <div class="dot active" onclick="goToSlide(0)"></div>
+                    <div class="dot" onclick="goToSlide(1)"></div>
+                    <div class="dot" onclick="goToSlide(2)"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ИМ НУЖНА ПОМОЩЬ -->
+    <section id="animals">
+        <div class="container">
+            <h2 class="section-title">🚨 Им нужна ваша помощь</h2>
+            <p class="section-subtitle">Каждая минута на счету. Пожалуйста, не проходите мимо.</p>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-img">🐱</div>
+                    <div class="card-body">
+                        <h3>Пушок</h3>
+                        <p>Около 5 лет. Кальцивироз, требуется операция по удалению зубов и комплексное лечение.</p>
+                        <div class="progress-info"><span>Собрано: 100 ₽</span><span>Нужно: 15 000 ₽</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 1%;"></div></div>
+                        <a href="#" class="btn-card">Помочь Пушку</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">🐱</div>
+                    <div class="card-body">
+                        <h3>Зая</h3>
+                        <p>Чёрная кошечка, ~3 года. Множественные переломы, две операции, борется за жизнь.</p>
+                        <div class="progress-info"><span>Собрано: 100 ₽</span><span>Нужно: 28 000 ₽</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 1%;"></div></div>
+                        <a href="#" class="btn-card">Помочь Зае</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЦИФРЫ -->
+    <section class="stats" id="about">
+        <div class="container">
+            <h2 class="section-title">Помощь в цифрах</h2>
+            <p class="section-subtitle">Мы только начинаем, но каждый шаг важен</p>
+            <div class="stats-grid">
+                <div><span class="stat-number">2</span><div class="stat-label">животных на попечении</div></div>
+                <div><span class="stat-number">12</span><div class="stat-label">волонтёров в команде</div></div>
+                <div><span class="stat-number">5</span><div class="stat-label">партнёрских приютов</div></div>
+                <div><span class="stat-number">2</span><div class="stat-label">операции оплачено</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КАК ПОМОЧЬ -->
+    <section id="help">
+        <div class="container">
+            <h2 class="section-title">Как помочь</h2>
+            <p class="section-subtitle">Выберите удобный способ</p>
+            <div class="help-grid">
+                <a href="#" class="help-item"><span class="help-icon">❤️</span><h3>Пожертвовать</h3><p>Любая сумма пойдёт на лечение и корм</p></a>
+                <a href="#" class="help-item"><span class="help-icon">📦</span><h3>Передать корм</h3><p>Корм, игрушки, амуниция, лекарства</p></a>
+                <a href="#" class="help-item"><span class="help-icon">🤝</span><h3>Стать волонтёром</h3><p>Выгул, социализация, помощь на мероприятиях</p></a>
+                <a href="#" class="help-item"><span class="help-icon">🏠</span><h3>Взять питомца</h3><p>Дайте шанс на счастливую жизнь</p></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer id="contacts">
+        <div class="container">
+            <div class="footer-grid">
+                <div><h4>🐾 Счастливая история</h4><p>АНО помощи животным<br>Ставрополь и Ставропольский край</p></div>
+                <div><h4>Контакты</h4><a href="mailto:info@happy-stories.ru">info@happy-stories.ru</a></div>
+                <div><h4>Реквизиты</h4><p>ИНН: 2634117299<br>ОГРН: 1262600005887</p></div>
+            </div>
+            <div class="footer-bottom">© 2026 АНО ПЖ «Счастливая история». Все права защищены.</div>
+        </div>
+    </footer>
+
+    <!-- СКРИПТ СЛАЙДЕРА -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const track = document.getElementById('sliderTrack');
+        const totalSlides = slides.length;
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function moveSlide(direction) {
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
+
+        // Автоперелистывание каждые 4 секунды
+        setInterval(() => moveSlide(1), 4000);
+    </script>
+
+</body>
+</html>
