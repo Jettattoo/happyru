@@ -1,0 +1,257 @@
+/* ===== Модальное окно донатов ===== */
+
+.donation-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 20px;
+}
+
+.donation-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.donation-modal {
+    position: relative;
+    width: 400px;
+    max-width: 100%;
+    max-height: 90vh;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    transform: translateX(120%);
+    transition: transform 0.4s ease-out;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.donation-modal-overlay.active .donation-modal {
+    transform: translateX(0);
+}
+
+.donation-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    font-size: 1.8rem;
+    color: #333;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    transition: background 0.2s, transform 0.2s;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.donation-modal-close:hover {
+    background: #fff;
+    transform: scale(1.1);
+}
+
+.donation-modal-header {
+    background: #ffd200;
+    padding: 30px 25px 25px;
+    text-align: center;
+    border-radius: 20px 20px 0 0;
+}
+
+.donation-modal-header h3 {
+    font-size: 1.25rem;
+    color: #222;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.donation-modal-header p {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.donation-modal-body {
+    padding: 25px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.donation-amounts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.amount-btn {
+    background: #ffd200;
+    border: 2px solid #ffd200;
+    color: #222;
+    padding: 15px 5px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.amount-btn:hover {
+    background: #e6bd00;
+}
+
+.amount-btn.active {
+    background: #1a5c2a;
+    color: #fff;
+    border-color: #1a5c2a;
+}
+
+.donation-custom {
+    margin-bottom: 20px;
+}
+
+.donation-custom label {
+    display: block;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.custom-input-wrapper {
+    position: relative;
+}
+
+.custom-input-wrapper input {
+    width: 100%;
+    padding: 14px 40px 14px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.custom-input-wrapper input:focus {
+    border-color: #ffd200;
+}
+
+.custom-input-wrapper .currency {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-weight: 600;
+}
+
+.donation-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    margin-bottom: 25px;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.donation-checkbox input {
+    width: 18px;
+    height: 18px;
+    accent-color: #1a5c2a;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.donation-user-data {
+    margin-bottom: 25px;
+}
+
+.user-data-title {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.donation-user-data input {
+    width: 100%;
+    padding: 14px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.donation-user-data input:focus {
+    border-color: #ffd200;
+}
+
+.donation-submit {
+    width: 100%;
+    background: #1a5c2a;
+    color: #fff;
+    border: none;
+    padding: 18px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 1px;
+}
+
+.donation-submit:hover {
+    background: #13451e;
+}
+
+.donation-submit:active {
+    transform: scale(0.98);
+}
+
+.donation-note {
+    color: #999;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-top: 15px;
+    line-height: 1.5;
+}
+
+/* ===== АДАПТИВ ===== */
+@media (max-width: 600px) {
+    .donation-modal-overlay {
+        padding: 0;
+        justify-content: center;
+        align-items: flex-end;
+    }
+    .donation-modal {
+        width: 100%;
+        max-height: 90vh;
+        border-radius: 20px 20px 0 0;
+        transform: translateY(100%);
+    }
+    .donation-modal-overlay.active .donation-modal {
+        transform: translateY(0);
+    }
+    .donation-modal-header {
+        border-radius: 20px 20px 0 0;
+    }
+}

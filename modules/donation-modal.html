@@ -1,0 +1,48 @@
+<!-- Модальное окно пожертвования -->
+<div class="donation-modal-overlay" id="donationModalOverlay">
+    <div class="donation-modal">
+        <button class="donation-modal-close" id="donationModalClose" aria-label="Закрыть">×</button>
+
+        <div class="donation-modal-header">
+            <h3>Помогите бездомным животным</h3>
+            <p>Благотворительный фонд «Счастливая история»</p>
+        </div>
+
+        <div class="donation-modal-body">
+            <!-- Быстрые суммы -->
+            <div class="donation-amounts">
+                <button class="amount-btn" data-amount="500">500 ₽</button>
+                <button class="amount-btn" data-amount="1000">1000 ₽</button>
+                <button class="amount-btn" data-amount="2000">2000 ₽</button>
+            </div>
+
+            <!-- Своя сумма -->
+            <div class="donation-custom">
+                <label for="customAmount">Или введите свою сумму:</label>
+                <div class="custom-input-wrapper">
+                    <input type="number" id="customAmount" placeholder="1000" min="1">
+                    <span class="currency">₽</span>
+                </div>
+            </div>
+
+            <!-- Регулярный платёж -->
+            <label class="donation-checkbox">
+                <input type="checkbox" id="monthlyDonation">
+                <span>Переводить раз в месяц</span>
+            </label>
+
+            <!-- Данные для чека -->
+            <div class="donation-user-data">
+                <p class="user-data-title">Введите данные для чека:</p>
+                <input type="text" id="donorName" placeholder="Имя">
+                <input type="email" id="donorEmail" placeholder="Email">
+            </div>
+
+            <!-- Кнопка ПОМОЧЬ -->
+            <button class="donation-submit" id="donationSubmit">ПОМОЧЬ</button>
+
+            <!-- Примечание -->
+            <p class="donation-note">🔒 Ваши данные защищены. Платёж обрабатывается через защищённое соединение.</p>
+        </div>
+    </div>
+</div>

@@ -19,8 +19,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadModule('modules/stats.html', 'stats-slot');
     await loadModule('modules/news.html', 'news-slot');
     await loadModule('modules/howtohelp.html', 'howtohelp-slot');
+    await loadModule('modules/stories.html', 'stories-slot');
+    await loadModule('modules/documents.html', 'documents-slot');
+    await loadModule('modules/whattogive.html', 'whattogive-slot');
+    await loadModule('modules/donation-modal.html', 'donation-modal-slot');
     await loadModule('modules/footer.html', 'footer-slot');
 
+    // Инициализация модулей ПОСЛЕ их загрузки
     if (typeof initSlider === 'function') initSlider();
     if (typeof initHelpCarousel === 'function') initHelpCarousel();
+    if (typeof initDonationModal === 'function') initDonationModal();
 });
